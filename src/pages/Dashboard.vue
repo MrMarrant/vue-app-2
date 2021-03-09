@@ -153,7 +153,7 @@
           activeIndex: 0,
           chartData: {
             datasets: [{ }],
-            labels: ['JANE', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'],
+            labels: ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'],
           },
           extraOptions: chartConfigs.purpleChartOptions,
           gradientColors: config.colors.primaryGradient,
@@ -239,60 +239,70 @@
       }
     },
     methods: {
-      initBigChart(index) {
-        let chartData = {
-          datasets: [{
-            fill: true,
-            borderColor: config.colors.primary,
-            borderWidth: 2,
-            borderDash: [],
-            borderDashOffset: 0.0,
-            pointBackgroundColor: config.colors.primary,
-            pointBorderColor: 'rgba(255,255,255,0)',
-            pointHoverBackgroundColor: config.colors.primary,
-            pointBorderWidth: 20,
-            pointHoverRadius: 4,
-            pointHoverBorderWidth: 15,
-            pointRadius: 4,
-            data: this.bigLineChart.allData[index]
-          }],
-          labels: ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'],
-        }
-        this.$refs.bigChart.updateGradients(chartData);
-        this.bigLineChart.chartData = chartData;
-        this.bigLineChart.activeIndex = index;
-      },
+      // initBigChart(index) {
+      //   let chartData = {
+      //     datasets: [{
+      //       fill: true,
+      //       borderColor: config.colors.primary,
+      //       borderWidth: 2,
+      //       borderDash: [],
+      //       borderDashOffset: 0.0,
+      //       pointBackgroundColor: config.colors.primary,
+      //       pointBorderColor: 'rgba(255,255,255,0)',
+      //       pointHoverBackgroundColor: config.colors.primary,
+      //       pointBorderWidth: 20,
+      //       pointHoverRadius: 4,
+      //       pointHoverBorderWidth: 15,
+      //       pointRadius: 4,
+      //       data: this.bigLineChart.allData[index]
+      //     }],
+      //     labels: ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'],
+      //   }
+      //   this.$refs.bigChart.updateGradients(chartData);
+      //   this.bigLineChart.chartData = chartData;
+      //   this.bigLineChart.activeIndex = index;
+      // },
           async initFrance(){
             let france = [];
-            const data = await this.getFrance('2020-04-01');
-
-      france.push(data);
-      //[this.getFrance('2020-04-01')/*,this.getFrance('2020-02-01'),this.getFrance('2020-03-01'),this.getFrance('2020-04-01'),this.getFrance('2020-05-01'),this.getFrance('2020-06-01'),this.getFrance('2020-07-01'),this.getFrance('2020-08-01'),this.getFrance('2020-09-01'),this.getFrance('2020-10-01'),this.getFrance('2020-11-01'),this.getFrance('2020-12-01')*/];
+      
+      france.push(await this.getFrance());
       return france;
       },
-      async getFrance(dateCovid){
-      const options = {
-  method: 'GET',
-  url: 'https://covid-19-data.p.rapidapi.com/report/country/name',
-  params: {date: dateCovid, name: 'France'},
-  headers: {
-    'x-rapidapi-key': 'e42a44444fmsh33250968d99735ap1d5e08jsn2a372ce9267d',
-    'x-rapidapi-host': 'covid-19-data.p.rapidapi.com'
-  }
-};
+      async getFrance() {
+      const avril = {
+        method: "GET",
+        url: "https://covid-19-data.p.rapidapi.com/report/country/name",
+        params: { date: '2020-04-01', name: "France" },
+        headers: {
+          "x-rapidapi-key":
+            "e42a44444fmsh33250968d99735ap1d5e08jsn2a372ce9267d",
+          "x-rapidapi-host": "covid-19-data.p.rapidapi.com",
+        },
+      };
 
-      axios.request(options).then(function (response) {   
-        console.log("getFrance");   
-	      console.log(response.data[0].provinces[0].confirmed);
-//         setTimeout(() => {
-//   console.log("we waited 2000 ms to run this code, oh boy wowwoowee!");
-// }, 2000);
+      const mai = {
+        method: "GET",
+        url: "https://covid-19-data.p.rapidapi.com/report/country/name",
+        params: { date: '2020-05-01', name: "France" },
+        headers: {
+          "x-rapidapi-key":
+            "e42a44444fmsh33250968d99735ap1d5e08jsn2a372ce9267d",
+          "x-rapidapi-host": "covid-19-data.p.rapidapi.com",
+        },
+      };
 
-        return response.data[0].provinces[0].confirmed;
-      }).catch(function (error) {
-	      console.error(error);
-});
-      }
+      const [firstResponse, secondResponse] = await Promise.all([
+    await axios.request(avril),
+    await axios.request(mai),
+  ]);
+  return this.setState({
+    avril: firstResponse.data[0].provinces[0].confirmed,
+    mai: secondResponse.data[0].provinces[0].confirmed,
+  });
+      //const response = await axios.request(options)
+      //return response.data[0].provinces[0].confirmed
+
+    },
     },
     async mounted() {
       var france = await this.initFrance();

@@ -2,13 +2,13 @@
   "dashboard": {
     "completedTasks": "Completed Tasks",
     "dailySales": "Daily Sales",
-    "performance": "Performance",
+    "performance": "Nombres de cas recencé",
     "simpleTable": "Simple Table",
-    "totalShipments": "Total Shipments",
+    "totalShipments": "Total recensé",
     "chartCategories": [
-      "Accounts",
-      "Purchases",
-      "Sessions"
+      "France",
+      "Italie",
+      "Alemagne"
     ],
     "tasks": "Tasks({count})",
     "today": "Today",
