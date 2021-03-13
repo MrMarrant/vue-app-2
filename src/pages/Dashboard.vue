@@ -42,9 +42,9 @@
         </card>
       </div>
     </div>
-    <!-- <div class="row">
+     <div class="row">
       <div class="col-lg-4" :class="{'text-right': isRTL}">
-        <card type="chart">
+        <!-- <card type="chart">
           <template slot="header">
             <h5 class="card-category">{{$t('dashboard.totalShipments')}}</h5>
             <h3 class="card-title"><i class="tim-icons icon-bell-55 text-primary "></i> 763,215</h3>
@@ -58,7 +58,7 @@
                         :extra-options="purpleLineChart.extraOptions">
             </line-chart>
           </div>
-        </card>
+        </card> -->
       </div>
       <div class="col-lg-4" :class="{'text-right': isRTL}">
         <card type="chart">
@@ -76,7 +76,7 @@
           </div>
         </card>
       </div>
-      <div class="col-lg-4" :class="{'text-right': isRTL}">
+      <!-- <div class="col-lg-4" :class="{'text-right': isRTL}">
         <card type="chart">
           <template slot="header">
             <h5 class="card-category">{{$t('dashboard.completedTasks')}}</h5>
@@ -91,8 +91,8 @@
             </line-chart>
           </div>
         </card>
-      </div>
-    </div> -->
+      </div> -->
+    </div>
     <!-- <div class="row">
       <div class="col-lg-6 col-md-12">
         <card type="tasks" :header-classes="{'text-right': isRTL}">
@@ -143,10 +143,14 @@
       UserTable
     },
     data() {
+      console.log("var france initié" );
+      let france =  this.initFrance();
+      console.log("var france terminé");
+      //this.afficherFrance(france)
       return {
         bigLineChart: {
           allData: [
-            [],
+            this.initFrance(),
             [],
             []
           ],
@@ -160,71 +164,71 @@
           gradientStops: [1, 0.4, 0],
           categories: [],
         },
-        // purpleLineChart: {
-        //   extraOptions: chartConfigs.purpleChartOptions,
-        //   chartData: {
-        //     labels: ['JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'],
-        //     datasets: [{
-        //       label: "Data",
-        //       fill: true,
-        //       borderColor: config.colors.primary,
-        //       borderWidth: 2,
-        //       borderDash: [],
-        //       borderDashOffset: 0.0,
-        //       pointBackgroundColor: config.colors.primary,
-        //       pointBorderColor: 'rgba(255,255,255,0)',
-        //       pointHoverBackgroundColor: config.colors.primary,
-        //       pointBorderWidth: 20,
-        //       pointHoverRadius: 4,
-        //       pointHoverBorderWidth: 15,
-        //       pointRadius: 4,
-        //       data: [80, 100, 70, 80, 120, 80],
-        //     }]
-        //   },
-        //   gradientColors: config.colors.primaryGradient,
-        //   gradientStops: [1, 0.2, 0],
-        // },
-        // greenLineChart: {
-        //   extraOptions: chartConfigs.greenChartOptions,
-        //   chartData: {
-        //     labels: ['JUL', 'AUG', 'SEP', 'OCT', 'NOV'],
-        //     datasets: [{
-        //       label: "My First dataset",
-        //       fill: true,
-        //       borderColor: config.colors.danger,
-        //       borderWidth: 2,
-        //       borderDash: [],
-        //       borderDashOffset: 0.0,
-        //       pointBackgroundColor: config.colors.danger,
-        //       pointBorderColor: 'rgba(255,255,255,0)',
-        //       pointHoverBackgroundColor: config.colors.danger,
-        //       pointBorderWidth: 20,
-        //       pointHoverRadius: 4,
-        //       pointHoverBorderWidth: 15,
-        //       pointRadius: 4,
-        //       data: [90, 27, 60, 12, 80],
-        //     }]
-        //   },
-        //   gradientColors: ['rgba(66,134,121,0.15)', 'rgba(66,134,121,0.0)', 'rgba(66,134,121,0)'],
-        //   gradientStops: [1, 0.4, 0],
-        // },
-        // blueBarChart: {
-        //   extraOptions: chartConfigs.barChartOptions,
-        //   chartData: {
-        //     labels: ['USA', 'GER', 'AUS', 'UK', 'RO', 'BR'],
-        //     datasets: [{
-        //       label: "Countries",
-        //       fill: true,
-        //       borderColor: config.colors.info,
-        //       borderWidth: 2,
-        //       borderDash: [],
-        //       borderDashOffset: 0.0,
-        //       data: [53, 20, 10, 80, 100, 45],
-        //     }]
-        //   },
-        //   gradientColors: config.colors.primaryGradient,
-        //   gradientStops: [1, 0.4, 0],
-        // }
+        purpleLineChart: {
+          extraOptions: chartConfigs.purpleChartOptions,
+          chartData: {
+            labels: ['JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'],
+            datasets: [{
+              label: "Data",
+              fill: true,
+              borderColor: config.colors.primary,
+              borderWidth: 2,
+              borderDash: [],
+              borderDashOffset: 0.0,
+              pointBackgroundColor: config.colors.primary,
+              pointBorderColor: 'rgba(255,255,255,0)',
+              pointHoverBackgroundColor: config.colors.primary,
+              pointBorderWidth: 20,
+              pointHoverRadius: 4,
+              pointHoverBorderWidth: 15,
+              pointRadius: 4,
+              data: [80, 100, 70, 80, 120, 80],
+            }]
+          },
+          gradientColors: config.colors.primaryGradient,
+          gradientStops: [1, 0.2, 0],
+        },
+        greenLineChart: {
+          extraOptions: chartConfigs.greenChartOptions,
+          chartData: {
+            labels: ['JUL', 'AUG', 'SEP', 'OCT', 'NOV'],
+            datasets: [{
+              label: "My First dataset",
+              fill: true,
+              borderColor: config.colors.danger,
+              borderWidth: 2,
+              borderDash: [],
+              borderDashOffset: 0.0,
+              pointBackgroundColor: config.colors.danger,
+              pointBorderColor: 'rgba(255,255,255,0)',
+              pointHoverBackgroundColor: config.colors.danger,
+              pointBorderWidth: 20,
+              pointHoverRadius: 4,
+              pointHoverBorderWidth: 15,
+              pointRadius: 4,
+              data: [90, 27, 60, 12, 80],
+            }]
+          },
+          gradientColors: ['rgba(66,134,121,0.15)', 'rgba(66,134,121,0.0)', 'rgba(66,134,121,0)'],
+          gradientStops: [1, 0.4, 0],
+        },
+        blueBarChart: {
+          extraOptions: chartConfigs.barChartOptions,
+          chartData: {
+            labels: ['USA', 'GER', 'AUS', 'UK', 'RO', 'BR'],
+            datasets: [{
+              label: "Countries",
+              fill: true,
+              borderColor: config.colors.info,
+              borderWidth: 2,
+              borderDash: [],
+              borderDashOffset: 0.0,
+              data: [53, 20, 10, 80, 100, 45],
+            }]
+          },
+          gradientColors: config.colors.primaryGradient,
+          gradientStops: [1, 0.4, 0],
+        }
       }
     },
     computed: {
@@ -239,75 +243,62 @@
       }
     },
     methods: {
-      // initBigChart(index) {
-      //   let chartData = {
-      //     datasets: [{
-      //       fill: true,
-      //       borderColor: config.colors.primary,
-      //       borderWidth: 2,
-      //       borderDash: [],
-      //       borderDashOffset: 0.0,
-      //       pointBackgroundColor: config.colors.primary,
-      //       pointBorderColor: 'rgba(255,255,255,0)',
-      //       pointHoverBackgroundColor: config.colors.primary,
-      //       pointBorderWidth: 20,
-      //       pointHoverRadius: 4,
-      //       pointHoverBorderWidth: 15,
-      //       pointRadius: 4,
-      //       data: this.bigLineChart.allData[index]
-      //     }],
-      //     labels: ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'],
-      //   }
-      //   this.$refs.bigChart.updateGradients(chartData);
-      //   this.bigLineChart.chartData = chartData;
-      //   this.bigLineChart.activeIndex = index;
-      // },
-          async initFrance(){
-            let france = [];
+      afficherFrance(france){
+        JSON.parse(france); 
+        france.forEach(element => console.log(element));
+        },
+      initBigChart(index) {
+        let chartData = {
+          datasets: [{
+            fill: true,
+            borderColor: config.colors.primary,
+            borderWidth: 2,
+            borderDash: [],
+            borderDashOffset: 0.0,
+            pointBackgroundColor: config.colors.primary,
+            pointBorderColor: 'rgba(255,255,255,0)',
+            pointHoverBackgroundColor: config.colors.primary,
+            pointBorderWidth: 20,
+            pointHoverRadius: 4,
+            pointHoverBorderWidth: 15,
+            pointRadius: 4,
+            data: this.bigLineChart.allData[index]
+          }],
+          labels: ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'],
+        }
+        this.$refs.bigChart.updateGradients(chartData);
+        this.bigLineChart.chartData = chartData;
+        this.bigLineChart.activeIndex = index;
+      },
+      async initFrance(){
+        let france = await this.getFrance();
       
-      france.push(await this.getFrance());
-      return france;
+        // france.push(await this.getFrance());
+        console.log("init foreach");
+        france.forEach(element => console.log(element));
+        return france;
       },
       async getFrance() {
-      const avril = {
-        method: "GET",
-        url: "https://covid-19-data.p.rapidapi.com/report/country/name",
-        params: { date: '2020-04-01', name: "France" },
-        headers: {
-          "x-rapidapi-key":
-            "e42a44444fmsh33250968d99735ap1d5e08jsn2a372ce9267d",
-          "x-rapidapi-host": "covid-19-data.p.rapidapi.com",
-        },
-      };
-
-      const mai = {
-        method: "GET",
-        url: "https://covid-19-data.p.rapidapi.com/report/country/name",
-        params: { date: '2020-05-01', name: "France" },
-        headers: {
-          "x-rapidapi-key":
-            "e42a44444fmsh33250968d99735ap1d5e08jsn2a372ce9267d",
-          "x-rapidapi-host": "covid-19-data.p.rapidapi.com",
-        },
-      };
-
-      const [firstResponse, secondResponse] = await Promise.all([
-    await axios.request(avril),
-    await axios.request(mai),
-  ]);
-  return this.setState({
-    avril: firstResponse.data[0].provinces[0].confirmed,
-    mai: secondResponse.data[0].provinces[0].confirmed,
-  });
-      //const response = await axios.request(options)
-      //return response.data[0].provinces[0].confirmed
+      const options = {
+  method: 'GET',
+  url: 'https://covid-193.p.rapidapi.com/statistics',
+  headers: {
+    'x-rapidapi-key': 'e42a44444fmsh33250968d99735ap1d5e08jsn2a372ce9267d',
+    'x-rapidapi-host': 'covid-193.p.rapidapi.com'
+  }
+};
+      const response = await axios.request(options)
+      let data = [];
+      data.push(response.data.response[156].cases.active);
+      data.push(response.data.response[157].cases.active);
+      return data;
 
     },
     },
     async mounted() {
-      var france = await this.initFrance();
-      console.log("var france initié" );
-      france.forEach(element => console.log(element));
+      //var france = await this.initFrance();
+      // console.log("var france initié" );
+      // france.forEach(element => console.log(element));
       this.i18n = this.$i18n;
       if (this.enableRTL) {
         this.i18n.locale = 'ar';
