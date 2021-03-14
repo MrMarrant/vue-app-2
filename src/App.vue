@@ -1,33 +1,47 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <h1> yo </h1>
-      <!-- <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link> -->
-    </div>
+  <div class="bg-gray-100 overflow-x-hidden">
+    <nav class="bg-white px-6 py-4 shadow">
+      <div class="flex flex-col container mx-auto md:flex-row md:items-center md:justify-between">
+        <div class="flex justify-between items-center">
+          <div>
+            <a href="#" class="text-gray-800 text-xl font-bold md:text-2xl">MySepace</a>
+          </div>
+          <div>
+            <button type="button"
+                    class="block text-gray-800 hover:text-gray-600 focus:text-gray-600 focus:outline-none md:hidden">
+              <svg viewBox="0 0 24 24" class="h-6 w-6 fill-current">
+                <path
+                    d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z">
+                </path>
+              </svg>
+            </button>
+          </div>
+        </div>
+        <div class="md:flex flex-col md:flex-row md:-mx-4 hidden">
+          <a href="#" class="my-1 text-gray-800 hover:text-blue-500 md:mx-5 md:my-0">
+            <router-link to="/">Blog</router-link>
+          </a>
+          <a href="#" class="my-1 text-gray-800 hover:text-blue-500 md:mx-5 md:my-0">
+            <router-link   to="/admin">Administration</router-link>
+          </a>
+          <a href="#" class="my-1 text-gray-800 hover:text-blue-500 md:mx-5 md:my-0">
+            <router-link  to="/profile">Profil</router-link>
+          </a>
+          <a href="#" class="my-1 text-gray-800 hover:text-blue-500 md:mx-5 md:my-0">
+            <router-link  to="/AddArticle">Ajouter un article</router-link>
+          </a>
+        </div>
+      </div>
+    </nav>
     <router-view/>
   </div>
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+export default {
+  name: "Home",
+  methods: {
+  },
+};
+</script>
 
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
-</style>
