@@ -64,7 +64,7 @@
         <card type="chart">
           <template slot="header">
             <h5 class="card-category">{{$t('dashboard.dailySales')}}</h5>
-            <h3 class="card-title"><i class="tim-icons icon-delivery-fast text-info "></i> 3,500€</h3>
+            <h3 class="card-title"><i></i>Case by Country</h3>
           </template>
           <div class="chart-area">
             <bar-chart style="height: 100%"
@@ -133,7 +133,9 @@
   import TaskList from './Dashboard/TaskList';
   import UserTable from './Dashboard/UserTable';
   import config from '@/config';
-  import axios from "axios";
+  import {RepositoryFactory} from "@/api/RepositoryFactory";
+
+  const CountryRepository = RepositoryFactory.get('country')
 
   export default {
     components: {
@@ -143,16 +145,11 @@
       UserTable
     },
     data() {
-      console.log("var france initié" );
-      let france =  this.initFrance();
-      console.log("var france terminé");
-      //this.afficherFrance(france)
+
       return {
         bigLineChart: {
           allData: [
-            this.initFrance(),
-            [],
-            []
+            [12234,1243]
           ],
           activeIndex: 0,
           chartData: {
@@ -215,15 +212,15 @@
         blueBarChart: {
           extraOptions: chartConfigs.barChartOptions,
           chartData: {
-            labels: ['USA', 'GER', 'AUS', 'UK', 'RO', 'BR'],
+            labels: [],
             datasets: [{
               label: "Countries",
-              fill: true,
+              fill: false,
               borderColor: config.colors.info,
               borderWidth: 2,
               borderDash: [],
               borderDashOffset: 0.0,
-              data: [53, 20, 10, 80, 100, 45],
+              data: [],
             }]
           },
           gradientColors: config.colors.primaryGradient,
@@ -243,10 +240,6 @@
       }
     },
     methods: {
-      afficherFrance(france){
-        JSON.parse(france); 
-        france.forEach(element => console.log(element));
-        },
       initBigChart(index) {
         let chartData = {
           datasets: [{
@@ -270,35 +263,38 @@
         this.bigLineChart.chartData = chartData;
         this.bigLineChart.activeIndex = index;
       },
-      async initFrance(){
-        let france = await this.getFrance();
-      
-        // france.push(await this.getFrance());
-        console.log("init foreach");
-        france.forEach(element => console.log(element));
-        return france;
-      },
-      async getFrance() {
-      const options = {
-  method: 'GET',
-  url: 'https://covid-193.p.rapidapi.com/statistics',
-  headers: {
-    'x-rapidapi-key': 'e42a44444fmsh33250968d99735ap1d5e08jsn2a372ce9267d',
-    'x-rapidapi-host': 'covid-193.p.rapidapi.com'
-  }
-};
-      const response = await axios.request(options)
-      let data = [];
-      data.push(response.data.response[156].cases.active);
-      data.push(response.data.response[157].cases.active);
-      return data;
+      async initCountry() {
+        let dataCountry = [];
+        let dataNameCountry = [];
+        const {data} = await CountryRepository.getAllCountry();
+        console.log(data.response)
+        this.blueBarChart.chartData.datasets[0].data.push(
+            //name: data.response[i].country,
+             data.response[220].cases.recovered, // France
+            data.response[211].cases.recovered, // Italie
+            data.response[212].cases.recovered, // Espagne
+            data.response[206].cases.recovered, // Poland
+          )
+        this.blueBarChart.chartData.labels.push(
+          //name: data.response[i].country,
+          data.response[220].country, // France
+          data.response[211].country, // Italie
+          data.response[212].country, // Espagne
+          data.response[206].country, // Poland
+        )
+          //console.log(data.response[i].country)
+          //console.log(data.response[i].cases.recovered)
 
-    },
+        //this.blueBarChart.chartData.datasets[0].data = [...this.blueBarChart.chartData.datasets[0].data, ...dataCountry];
+        //this.blueBarChart.chartData.labels = [...this.blueBarChart.chartData.labels, ...dataNameCountry];
+        console.log(this.blueBarChart.chartData.datasets);
+        console.log(this.blueBarChart.chartData);
+      }
     },
     async mounted() {
-      //var france = await this.initFrance();
-      // console.log("var france initié" );
-      // france.forEach(element => console.log(element));
+      this.initCountry();
+      console.log(this.blueBarChart.chartData.datasets[0])
+      window.resizeTo(123, 3211)
       this.i18n = this.$i18n;
       if (this.enableRTL) {
         this.i18n.locale = 'ar';
