@@ -18,16 +18,14 @@ const CountryRepository = RepositoryFactory.get('country')
 export default {
   name: "home",
   data: function () {
-    console.log("debut");
     //let france =  this.initFrance();
-    console.log("fin");
     return {
       options: {
         chart: {
           id: 'vuechart-example'
         },
         xaxis: {
-          categories: ["France", "Allemagne", "Italie"]
+          categories: []
         }
       },
       series: [{
@@ -38,18 +36,30 @@ export default {
   },
   methods: {
     async initCountry() {
-      let dataCountry = [];
+      //let dataCountry = [];
+      //let dataNameCountry = [];
       const {data} = await CountryRepository.getAllCountry();
-      for (let i = 0; i < 5 ; i++) {
-        dataCountry.push({
-          name: data.response[i].country,
-          case: data.response[i].cases.recovered,
-        })
-        //console.log(data.response[i].country)
-        //console.log(data.response[i].cases.recovered)
-      }
-      this.series.data = [...this.series.data, ...dataCountry];
-      console.log(this.series.data);
+      // eslint-disable-next-line no-console
+      console.log(data.response)
+      this.series[0].data.push(
+          //name: data.response[i].country,
+          data.response[220].cases.recovered, // France
+          data.response[211].cases.recovered, // Italie
+          data.response[212].cases.recovered, // Espagne
+          data.response[206].cases.recovered, // Poland
+      )
+      this.options.xaxis.categories.push(
+          //name: data.response[i].country,
+          data.response[220].country, // France
+          data.response[211].country, // Italie
+          data.response[212].country, // Espagne
+          data.response[206].country, // Poland
+      )
+      //console.log(data.response[i].country)
+      //console.log(data.response[i].cases.recovered)
+      //this.blueBarChart.chartData.datasets[0].data = [...this.blueBarChart.chartData.datasets[0].data, ...dataCountry];
+      //this.blueBarChart.chartData.labels = [...this.blueBarChart.chartData.labels, ...dataNameCountry];
+
     }
   },
   mounted() {
