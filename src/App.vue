@@ -4,7 +4,7 @@
       <div class="flex flex-col container mx-auto md:flex-row md:items-center md:justify-between">
         <div class="flex justify-between items-center">
           <div>
-            <a href="#" class="text-gray-800 text-xl font-bold md:text-2xl">MySepace</a>
+            <a href="/" class="text-gray-800 text-xl font-bold md:text-2xl">Covid Tracker</a>
           </div>
           <div>
             <button type="button"
@@ -19,16 +19,7 @@
         </div>
         <div class="md:flex flex-col md:flex-row md:-mx-4 hidden">
           <a href="#" class="my-1 text-gray-800 hover:text-blue-500 md:mx-5 md:my-0">
-            <router-link to="/">Blog</router-link>
-          </a>
-          <a href="#" class="my-1 text-gray-800 hover:text-blue-500 md:mx-5 md:my-0">
-            <router-link   to="/admin">Administration</router-link>
-          </a>
-          <a href="#" class="my-1 text-gray-800 hover:text-blue-500 md:mx-5 md:my-0">
-            <router-link  to="/profile">Profil</router-link>
-          </a>
-          <a href="#" class="my-1 text-gray-800 hover:text-blue-500 md:mx-5 md:my-0">
-            <router-link  to="/AddArticle">Ajouter un article</router-link>
+            <router-link to="/test">Bilan Cas/Morts</router-link>
           </a>
         </div>
       </div>
