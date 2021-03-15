@@ -19,7 +19,10 @@
         </div>
         <div class="md:flex flex-col md:flex-row md:-mx-4 hidden">
           <a href="#" class="my-1 text-gray-800 hover:text-blue-500 md:mx-5 md:my-0">
-            <router-link to="/test">Bilan Cas/Morts</router-link>
+            <router-link to="/case">Bilan Cas/Morts</router-link>
+          </a>
+          <a href="#" class="my-1 text-gray-800 hover:text-blue-500 md:mx-5 md:my-0">
+            <router-link to="/map">Carte</router-link>
           </a>
         </div>
       </div>
