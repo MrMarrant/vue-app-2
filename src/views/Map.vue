@@ -21,8 +21,10 @@ import Charts from "fusioncharts/fusioncharts.charts";
 import World from "fusioncharts/maps/fusioncharts.world";
 import NA from "../assets/fusioncharts.northamerica";
 import SA from "../assets/fusioncharts.southamerica";
+import {RepositoryFactory} from "@/api/RepositoryFactory";
 
 Vue.use(VueFusionCharts, FusionCharts, Maps, Charts, World, NA, SA);
+const CountryRepository = RepositoryFactory.get('country')
 
 export default {
   name: "App",
@@ -49,15 +51,15 @@ export default {
           endlabel: "High",
           code: "#D7DDFF",
           minvalue: "0",
-          gradient: "1",
+          gradient: "100000",
           color: [
             {
-              maxvalue: "150",
+              maxvalue: "5000000",
               displayvalue: "Average",
               code: "#828FD6"
             },
             {
-              maxvalue: "300",
+              maxvalue: "10000000",
               code: "#36469F"
             }
           ]
@@ -65,31 +67,31 @@ export default {
         data: [
           {
             id: "NA",
-            value: "57.2",
+            value: [],
             displayValue: "NA{br}drilldown",
             link: "newchart-json-NA"
           },
           {
             id: "SA",
-            value: "57.1",
+            value: [],
             displayValue: "SA{br}drilldown",
             link: "newchart-json-SA"
           },
           {
             id: "AS",
-            value: "290"
+            value: []
           },
           {
             id: "EU",
-            value: "188.5"
+            value: []
           },
           {
             id: "AF",
-            value: "87.2"
+            value: []
           },
           {
             id: "AU",
-            value: "29"
+            value: []
           }
         ],
         linkeddata: [
@@ -356,27 +358,65 @@ export default {
   methods: {
     configureLink: function(chart) {
       this.chartInstance = chart; // Save it for further use
-
-      // Configure Drilldown attributes
-      // See this : https://www.fusioncharts.com/dev/api/fusioncharts/fusioncharts-methods#configureLink
-
-      // this.chartInstance.configureLink(
-      //   {
-      //     type: "northamerica"
-      //   },
-      //   0
-      // );
-
-      // this.chartInstance.configureLink(
-      //   {
-      //     type: "southamerica"
-      //   },
-      //   0
-      // );
-    }
+    },
+    async initEurope() {
+      const {data} = await CountryRepository.getEurope();
+      // eslint-disable-next-line no-console
+      console.log('france')
+      // eslint-disable-next-line no-console
+      console.log(data.response[0])
+      this.dataSource.data[3].value = data.response[0].cases.active
+    },
+    async initNA() {
+      const {data} = await CountryRepository.getNA();
+      // eslint-disable-next-line no-console
+      console.log('france')
+      // eslint-disable-next-line no-console
+      console.log(data.response[0])
+      this.dataSource.data[0].value = data.response[0].cases.active
+    },
+    async initSA() {
+      const {data} = await CountryRepository.getSA();
+      // eslint-disable-next-line no-console
+      console.log('france')
+      // eslint-disable-next-line no-console
+      console.log(data.response[0])
+      this.dataSource.data[1].value = data.response[0].cases.active
+    },
+    async initAsia() {
+      const {data} = await CountryRepository.getAsia();
+      // eslint-disable-next-line no-console
+      console.log('france')
+      // eslint-disable-next-line no-console
+      console.log(data.response[0])
+      this.dataSource.data[2].value = data.response[0].cases.active
+    },
+    async initAustralia() {
+      const {data} = await CountryRepository.getAustralia();
+      // eslint-disable-next-line no-console
+      console.log('france')
+      // eslint-disable-next-line no-console
+      console.log(data.response[0])
+      this.dataSource.data[5].value = data.response[0].cases.active
+    },
+    async initAfrica() {
+      const {data} = await CountryRepository.getAfrica();
+      // eslint-disable-next-line no-console
+      console.log('france')
+      // eslint-disable-next-line no-console
+      console.log(data.response[0])
+      this.dataSource.data[4].value = data.response[0].cases.active
+    },
   },
   mounted: function() {
-    this.configureLink(this.$refs.fc.chartObj); // this.$refs.fc gets the vue-fusionchart component
+    this.configureLink(this.$refs.fc.chartObj); // this.$refs.fc gets the vue-fusionchart component*
+    this.initEurope();
+    this.initAustralia();
+    this.initAsia();
+    this.initNA();
+    this.initSA();
+    this.initAfrica();
+
   }
 };
 </script>
