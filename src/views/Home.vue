@@ -126,7 +126,7 @@ export default {
     },
   },
   mounted() {
-    //this.initCountry();
+    this.initCountry();
     this.initFrance();
     this.initSpain();
     this.initItaly()

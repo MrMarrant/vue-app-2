@@ -4,7 +4,8 @@
       <div class="flex flex-col container mx-auto md:flex-row md:items-center md:justify-between">
         <div class="flex justify-between items-center">
           <div>
-            <a href="/" class="text-gray-800 text-xl font-bold md:text-2xl">Covid Tracker</a>
+            <a href="#" class="text-gray-800 text-xl font-bold md:text-2xl"></a>
+            <router-link to="/" class="text-gray-800 text-xl font-bold md:text-2xl">Covid Tracker</router-link>
           </div>
           <div>
             <button type="button"
